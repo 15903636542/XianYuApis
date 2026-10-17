@@ -35,7 +35,7 @@ class XianyuLive:
             "Accept-Encoding": "gzip, deflate, br, zstd",
             "Accept-Language": "zh-CN,zh;q=0.9",
         }
-        async with websockets.connect(self.base_url, extra_headers=headers) as websocket:
+        async with websockets.connect(self.base_url, additional_headers=headers) as websocket:
             asyncio.create_task(self.init(websocket))
             send_mid = generate_mid()
             msg = {
@@ -267,7 +267,7 @@ class XianyuLive:
             "Accept-Language": "zh-CN,zh;q=0.9",
         }
         threading.Thread(target=self.user_alive).start()
-        async with websockets.connect(self.base_url, extra_headers=headers) as websocket:
+        async with websockets.connect(self.base_url, additional_headers=headers) as websocket:
             asyncio.create_task(self.init(websocket))
             asyncio.create_task(self.heart_beat(websocket))
             async for message in websocket:
@@ -324,7 +324,7 @@ class XianyuLive:
 
 
 if __name__ == '__main__':
-    cookies_str = r''
+    cookies_str = r'cna=kdM3IhsHNUkCAdy/EGJw7OSa; xlly_s=1; cookie2=11d5788dbcf16e5d10e42a8240b4cae9; mtop_partitioned_detect=1; _m_h5_tk=16be9837dc956f0744b37aef015a1928_1792230078265; _m_h5_tk_enc=c13dc45b88c794d04c1263fc18aba6d1; _samesite_flag_=true; t=0a811c7f4c47a9c5cf62aed68135a2f2; _tb_token_=3e4e3b736b3eb; tracknick=%E4%B8%AB%E4%B8%AB%E4%B8%AB2521221; unb=3003037861; sgcookie=E1001yXae3fOveKzncKeE5xflXEumschLU%2FnOf1v%2BH2bitr1QKqHHPY8mkOEawhhyh%2FNPIZtV6de7B7vzNlD0c8jhXgrCRMcsAgurwMaPpyIBug%3D; csg=18eb32e6; havana_lgc2_77=eyJoaWQiOjMwMDMwMzc4NjEsInNnIjoiZjI5NzE5ZWViYWJjNzhhNmYwNTNhMjA3N2U4YzhjNWYiLCJzaXRlIjo3NywidG9rZW4iOiIxM1J1T081MllERU4wUjZqNFFwdEhoZyJ9; _hvn_lgc_=77; havana_lgc_exp=1794813121583; sdkSilent=1792307523768; tfstk=gYSiI9Y6RBGWJ3lUqj-_MGrz2v4p1htX8snvMnd48BRI6fnO3jfcT_BtXiB2isfpOOnYCOH1R_BrXGU6Dmx6cnP8wuE-COtX0OdRtPO1L994pdu35-G6cnP892n25uxf6DwciFWUKKpxgq523DoeOKMw0C8qT2JyTI-VgFrETLpD3j-q0ByHhBR20n5VLJvvTI-20sWEw1zwZiSdYP707uyVjMSHIFAPIziqmMmJSQWwtmzFxdxWaORn0mRzjvyR3sPmD375tiYPFomBXTbeYKjbUqADrN59dsqobCShQGRObWn9_G6FyiCz9VdNrKXRoOrZYhI1Qa8V4SgVChdMbBjbhmONWtSvoGPrHCS16MY5cfVpMaBdbefz9DfXoZS9YGPUqgzE84rQam9UHMujlFJBKQ3hj6f5oLW27J2nP-Twddd8KJ0jnFJBLgw3K4o67p9aI'
     xianyuLive = XianyuLive(cookies_str)
 
     # 1 获取全部聊天记录
